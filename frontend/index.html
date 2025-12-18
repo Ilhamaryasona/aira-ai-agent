@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AIRA – AI Assistant Mahasiswa</title>
+</head>
+<body>
+  <h2>AIRA – Academic AI Agent</h2>
+
+  <textarea id="input" rows="6" cols="60"></textarea><br><br>
+  <button onclick="send()">Kirim</button>
+
+  <pre id="output"></pre>
+
+  <script>
+    async function send() {
+      const res = await fetch("/chat", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ message: input.value })
+      });
+      const data = await res.json();
+      output.textContent = data.response;
+    }
+  </script>
+</body>
+</html>
